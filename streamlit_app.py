@@ -16,8 +16,8 @@ path = "data"
 with st.sidebar:
     st.title('المساعد الذكي للقطب الرقمي')
     st.markdown('''
-    ## معلومات عنا:
-    هذا التطبيق هو تواصل مع المساعد الذكي للقطب الرقمي.\n  تم بناؤه باستخدام:
+    ## :معلومات عنا
+    هذا التطبيق هو تواصل مع المساعد الذكي للقطب الرقمي.<br>  تم بناؤه باستخدام:
     - [Streamlit](https://streamlit.io/)
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
     - [Pôle Didital](https://www.poledigital.ma/)
