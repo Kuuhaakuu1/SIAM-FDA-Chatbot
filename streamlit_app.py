@@ -20,7 +20,7 @@ with st.sidebar:
     هذا التطبيق هو تواصل مع المساعد الذكي للقطب الرقمي.\n \n  تم بناؤه باستخدام
     - [Streamlit](https://streamlit.io/)
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
-    - [Pôle Didital](https://www.poledigital.ma/)
+    - [Pôle Digital](https://www.poledigital.ma/)
     ''')
     add_vertical_space(5)
     st.write('تم إنشاؤه من قبل فريق الذكاء الاصطناعي للقطب الرقمي')
@@ -32,7 +32,7 @@ warnings = ["إحذر! هنالك خطر مرض اشجار الزيتون 🫒�
             "إحذر! هنالك خطر مرض اشجار الزيتون 🫒🌴", "إحذر! هنالك خطر مرض اشجار الزيتون 🫒🌴🫒🌴"]
 if "messages" not in st.session_state.keys(): # Initialize the chat messages history
     st.session_state.messages = [
-        {"role": "assistant",  "content": warnings[0] + "\n \n  \n \n تعرف على المساعدات المالية الحكومية لتشجيع الاستثمار الزراعي "}# @todo show the warnings based on the time of the year
+        {"role": "assistant",  "content": warnings[2] + "\n \n  \n \n تعرف على المساعدات المالية الحكومية لتشجيع الاستثمار الزراعي "}# @todo show the warnings based on the time of the year
     ]
 
 
