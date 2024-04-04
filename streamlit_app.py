@@ -4,7 +4,6 @@ import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space 
 os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 from llama_index import (
-    Document,
     VectorStoreIndex,
     SimpleDirectoryReader,
     StorageContext,
