@@ -14,23 +14,23 @@ path = "data"
 
 # Side bar contents
 with st.sidebar:
-    st.title('الذكاء الاصطناعي أشبال')
+    st.title('المساعد الذكي للقطب الرقمي')
     st.markdown('''
     ## معلومات عنا:
-    هذا التطبيق هو تواصل مع الذكاء الاصطناعي أشبال مدعومة ب (LLM) تم بناؤه باستخدام:
+    هذا التطبيق هو تواصل مع المساعد الذكي للقطب الرقمي مدعومة ب (LLM) تم بناؤه باستخدام:
     - [Streamlit](https://streamlit.io/)
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
-    - [Idarati dataset](https://www.idarati.ma/)
+    - [Pôle Didital](https://www.poledigital.ma/)
     ''')
     add_vertical_space(5)
-    st.write('تم إنشاؤه من قبل فريق أشبال')
-st.title('تواصل مع الذكاء الاصطناعي أشبال')
+    st.write('تم إنشاؤه من قبل فريق الذكاء الاصطناعي للقطب الرقمي')
+st.title('إكتشف المساﻋﺪات الماﻟﻴﺔ ﻟﻠﺪوﻟﺔ ﻟﺘﺸﺠﻴﻊ اﻻﺳﺘﺜﻤﺎرات في اﻟﻘﻄﺎع اﻟﻔﻼﺣﻲ')
 
 
-
+warnings = ["إحذر! هنالك خطر مرض اشجار الزيتون 1", "إحذر! هنالك خطر مرض اشجار الزيتون 2", "إحذر! هنالك خطر مرض اشجار الزيتون 3"]
 if "messages" not in st.session_state.keys(): # Initialize the chat messages history
     st.session_state.messages = [
-        {"role": "assistant",  "content": "اسألني سؤالاً حول مكتبة مستندات مفتوحة المصدر Idarati !"}
+        {"role": "assistant",  "content": warnings[0] + "\n \n Ask your Questions :D"}# @todo show the warnings based on the time of the year
     ]
 
 
