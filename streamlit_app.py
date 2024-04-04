@@ -14,7 +14,6 @@ path = "data"
 
 # Side bar contents
 with st.sidebar:
-    st.image("./assets/logo-large-pole-digital-light.png")
     st.title('المساعد الذكي للقطب الرقمي')
     st.markdown('''
     ## :معلومات عنا
@@ -25,6 +24,7 @@ with st.sidebar:
     ''')
     add_vertical_space(5)
     st.write('تم إنشاؤه من قبل فريق الذكاء الاصطناعي للقطب الرقمي')
+    st.image("./assets/logo-large-pole-digital-light.png")
 st.title('إكتشف المساﻋﺪات الماﻟﻴﺔ ﻟﻠﺪوﻟﺔ ﻟﺘﺸﺠﻴﻊ اﻻﺳﺘﺜﻤﺎرات في اﻟﻘﻄﺎع اﻟﻔﻼﺣﻲ')
 
 
