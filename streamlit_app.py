@@ -14,7 +14,7 @@ path = "data"
 
 # Side bar contents
 with st.sidebar:
-    st.image("assets\logo-large-pole-digital-light.png")
+    st.image("./assets/logo-large-pole-digital-light.png")
     st.title('المساعد الذكي للقطب الرقمي')
     st.markdown('''
     ## :معلومات عنا
