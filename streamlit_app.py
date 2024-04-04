@@ -53,7 +53,7 @@ index = load_index()
 
 
 if "chat_engine" not in st.session_state.keys(): # Initialize the chat engine
-        st.session_state.chat_engine = index.as_chat_engine(chat_mode="condense_question", verbose=True)
+        st.session_state.chat_engine = index.as_chat_engine(chat_mode="context", verbose=True, system_prompt=("If you need aditional information, ask for it"))
 # either way we can now query the index
 # query_engine = index.as_query_engine()
 
