@@ -27,17 +27,18 @@ with st.sidebar:
 st.title('إكتشف المساﻋﺪات الماﻟﻴﺔ ﻟﻠﺪوﻟﺔ ﻟﺘﺸﺠﻴﻊ اﻻﺳﺘﺜﻤﺎرات في اﻟﻘﻄﺎع اﻟﻔﻼﺣﻲ')
 
 
-warnings = ["إحذر! هنالك خطر مرض اشجار الزيتون 1", "إحذر! هنالك خطر مرض اشجار الزيتون 2", "إحذر! هنالك خطر مرض اشجار الزيتون 3"]
+warnings = ["إحذر! هنالك خطر مرض اشجار الزيتون 🫒🫒🌴🌴",
+            "إحذر! هنالك خطر مرض اشجار الزيتون 🫒🌴", "إحذر! هنالك خطر مرض اشجار الزيتون 🫒🌴🫒🌴"]
 if "messages" not in st.session_state.keys(): # Initialize the chat messages history
     st.session_state.messages = [
-        {"role": "assistant",  "content": warnings[0] + "\n \n Ask your Questions :D"}# @todo show the warnings based on the time of the year
+        {"role": "assistant",  "content": warnings[0] + "\n \n تعرف على المساعدات المالية الحكومية لتشجيع الاستثمار الزراعي "}# @todo show the warnings based on the time of the year
     ]
 
 
 
 @st.cache_resource(show_spinner=False)
 def load_index():
-    with st.spinner(text="جاري تحميل  مستندات اداراتي  انتظر قليلاً! قد يستغرق هذا الأمر من 1 إلى 2 دقيقة."):
+    with st.spinner(text="جاري تحميل المستندات انتظر قليلاً! قد يستغرق هذا الأمر من 1 إلى 2 دقيقة."):
         if not os.path.exists("./storage"):
             # load the documents and create the index
             documents = SimpleDirectoryReader(path).load_data()
