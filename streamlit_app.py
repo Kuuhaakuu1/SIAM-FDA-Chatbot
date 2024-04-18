@@ -1,6 +1,8 @@
 import os.path
 import os
 import streamlit as st
+import numpy as np
+import pickle
 from streamlit_extras.add_vertical_space import add_vertical_space 
 os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 from llama_index.core  import (
@@ -9,31 +11,53 @@ from llama_index.core  import (
     StorageContext,
     load_index_from_storage,
 )
+#################################################################
+def load_translations(file_path):
+    try:
+        with open(file_path, 'rb') as file:
+            return pickle.load(file)
+    except FileNotFoundError:
+        print("The file was not found.")
+        return {}
 
+translations = load_translations('translations.pkl')
+# Toggle language function
+def toggle_language():
+    st.session_state.toggle = not st.session_state.toggle
+    # Reset the initial message with the new language
+    st.session_state.messages = [{"role": "assistant", "content": translations['fr' if st.session_state.toggle else 'ar']['initial_message']}]
+
+# Initialize the session state for toggle if it's not already there
+if 'toggle' not in st.session_state:
+    st.session_state.toggle = True  # True for English, False for Arabic
+
+# Initialize messages if not present
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": translations['fr' if st.session_state.toggle else 'ar']['initial_message']}]
+
+current_lang = 'fr' if st.session_state.toggle else 'ar'
+#################################################################
 path = "data"
 
-# Side bar contents
+# Sidebar contents
 with st.sidebar:
-    st.title('المساعد الذكي للقطب الرقمي')
-    st.markdown('''
-    ## :معلومات عنا
-    هذا التطبيق هو تواصل مع المساعد الذكي للقطب الرقمي.\n \n  تم بناؤه باستخدام
-    - [Streamlit](https://streamlit.io/)
-    - [OpenAI](https://platform.openai.com/docs/models) LLM Model
-    - [Pôle Digital](https://www.poledigital.ma/)
-    ''')
-    add_vertical_space(5)
-    st.write('تم إنشاؤه من قبل فريق الذكاء الاصطناعي للقطب الرقمي')
+    st.button(
+        label=translations[current_lang]['language'],
+        on_click=toggle_language
+    )
+    st.title(translations[current_lang]['title'])
+    st.markdown(translations[current_lang]['about_us_description'])
+    st.write(translations[current_lang]['created_by'])
     st.image("./assets/logo-large-pole-digital-light.png")
-st.title('إكتشف المساﻋﺪات الماﻟﻴﺔ ﻟﻠﺪوﻟﺔ ﻟﺘﺸﺠﻴﻊ اﻻﺳﺘﺜﻤﺎرات في اﻟﻘﻄﺎع اﻟﻔﻼﺣﻲ')
 
+# Main page contents
+col1, col2, col3, col4, col5 = st.columns([0.5,0.8,0.8,0.8,5])
+col1.image("./assets/logo-large-pole-digital-light.png", width=117)
+col3.image("./assets/IAV_White.png", width=50)
+col4.image("./assets/ONCA1 (Custom).png", width=50)
+col5.image("./assets/ONSSA (Custom).png", width=50)
 
-if "messages" not in st.session_state.keys(): # Initialize the chat messages history
-    st.session_state.messages = [
-        {"role": "assistant",  "content":"تعرف على المساعدات المالية الحكومية لتشجيع الاستثمار الزراعي "}
-    ]
-
-
+st.title(translations[current_lang]['discover_financial_aid'])
 
 @st.cache_resource(show_spinner=False)
 def load_index():
@@ -52,28 +76,24 @@ def load_index():
 index = load_index()
 
 
+# Handling chat interactions
+if "messages" not in st.session_state.keys():  # Initialize the chat messages history
+    st.session_state.messages = [{"role": "assistant",  "content": translations[current_lang]['initial_message']}]
+    
 if "chat_engine" not in st.session_state.keys(): # Initialize the chat engine
-        st.session_state.chat_engine = index.as_chat_engine(chat_mode="context", verbose=True, system_prompt=("If you need aditional information, ask for it"))
-# either way we can now query the index
-# query_engine = index.as_query_engine()
+        st.session_state.chat_engine = index.as_chat_engine(chat_mode="condense_plus_context", verbose=True, system_prompt=("If you need aditional information, ask for it."))
 
-if prompt := st.chat_input(" أدخل سؤالك هنا"): # Prompt for user input and save to chat history
+if prompt := st.chat_input(translations[current_lang]['enter_your_question']):  # Prompt for user input and save to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-for message in st.session_state.messages: # Display the prior chat messages
+for message in st.session_state.messages:  # Display the prior chat messages
     with st.chat_message(message["role"]):
         st.write(message["content"])
         
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
-        with st.spinner("جارٍ التفكير..."):
+        with st.spinner(translations[current_lang]['thinking']):
             response = st.session_state.chat_engine.chat(prompt)
             st.write(response.response)
             message = {"role": "assistant", "content": response.response}
-            st.session_state.messages.append(message) # Add response to message history        
-# query = st.text_input("What would you like to know about your PDF?")
-    
-# if query:
-#     print(type(query))
-#     response = query_engine.query(query)
-#     st.write(response)
+            st.session_state.messages.append(message)  # Add response to message history
